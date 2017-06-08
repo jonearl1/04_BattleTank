@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankAimComponent.h"
-
+#include "TankBarrel.h"
 
 // Sets default values for this component's properties
 UTankAimComponent::UTankAimComponent()
@@ -48,7 +48,16 @@ void UTankAimComponent::AimAt(FVector HitLocation, float LaunchSpeed )
 		if (UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, HitLocation, LaunchSpeed ))
 		{
 			auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-			UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s "), *OurTankName, *AimDirection.ToString());
+			MoveBarrelTowards(AimDirection);
+			//UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s "), *OurTankName, *AimDirection.ToString());
 		}
 	}
+}
+
+void UTankAimComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotation;
+	Barrel->Elevate(5.0f);
 }
