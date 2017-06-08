@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
+#include "Engine.h"
 #include "Components/ActorComponent.h"
 #include "TankAimComponent.generated.h"
 
@@ -16,7 +16,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimComponent();
 	void SetBarrel(UStaticMeshComponent* BarrelToSet) { Barrel = BarrelToSet; }
-	void AimAt(FVector HitLocation);
+	void AimAt(FVector HitLocation, float LaunchSpeed );
 
 protected:
 	// Called when the game starts
