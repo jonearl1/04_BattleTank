@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
 
 
 
@@ -38,6 +39,10 @@ void ATankPlayerController::AimTowardsCrosshair(FVector &HitLocation)
 	{
 		GetControlledTank()->AimAt((HitLocation));
 	}
+	else
+	{
+		GetControlledTank()->SetAimSolution(false);
+	}
 }
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation)
@@ -63,8 +68,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation)
 	FVector EndPos = WorldLocation + WorldDirection * 50000.0f;
 
 	FHitResult Result = GetFirstObjectAlongRay(WorldLocation, EndPos);
-	HitLocation = Result.Location;
-	return(true);
+	if (Result.IsValidBlockingHit())
+	{
+		HitLocation = Result.Location;
+		return(true);
+	}
+	return(false);
 }
 
 
