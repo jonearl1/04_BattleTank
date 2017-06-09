@@ -17,12 +17,14 @@ class BATTLETANK_API ATank : public APawn
 
 public:
 	void AimAt(FVector HitLocation);
+	void SetAimSolution(bool Flag);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel *BarrelToSet);
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret *TurretToSet);
-	void SetAimSolution(bool Flag);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void TankFire();
 
 protected:
 	UTankAimComponent *TankAimingComponent = NULL;
