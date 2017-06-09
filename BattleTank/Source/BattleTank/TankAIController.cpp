@@ -37,7 +37,8 @@ void ATankAIController::AimTowardsPlayer( void )
 	if( PlayerTank )
 	{
 		FVector HitLocation = PlayerTank->GetActorLocation();
-		//GetControlledTank()->AimAt((HitLocation));
+		GetControlledTank()->AimAt((HitLocation));
+		GetControlledTank()->TankFire();
 	}
 }
 

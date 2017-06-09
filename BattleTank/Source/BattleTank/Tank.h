@@ -8,6 +8,7 @@
 
 class UTankBarrel;
 class UTankTurret;
+class UTankTrack;
 class UTankAimComponent;
 class AProjectile;
 
@@ -22,8 +23,16 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel *BarrelToSet);
+
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret *TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetRightTrack(UTankTrack*TrackToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetLeftTrack(UTankTrack*TrackToSet);
+
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void TankFire();
 
@@ -39,12 +48,16 @@ private:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, Category = Firing )
-	float LaunchSpeed = 100000.0f;
+	UPROPERTY(EditDefaultsOnly, Category = Firing )
+	float LaunchSpeed = 4000.0f;
 
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 	UTankBarrel *Barrel = NULL;
+	double LastFireTime = 0.0;
+	float ReloadTimeInSeconds = 3.0f;
+	UTankTrack *LeftTrack;
+	UTankTrack *RightTrack;
 	
 };

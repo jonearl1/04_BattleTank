@@ -29,8 +29,8 @@ private:
 
 	FHitResult GetFirstObjectAlongRay(FVector Start, FVector End);
 
-	UPROPERTY( EditAnywhere )
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairXLocation = 0.5f;
-	UPROPERTY( EditAnywhere )
+	UPROPERTY(EditDefaultsOnly)
 	float CrossHairYLocation = 0.3333f;
 };

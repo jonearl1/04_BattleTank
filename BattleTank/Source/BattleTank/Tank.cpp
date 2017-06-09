@@ -6,6 +6,7 @@
 #include "TankTurret.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
+#include "TankTrack.h"
 
 
 // Sets default values
@@ -51,10 +52,25 @@ void ATank::SetTurretReference(UTankTurret *TurretToSet)
 	TankAimingComponent->SetTurret(TurretToSet);
 }
 
+void ATank::SetLeftTrack(UTankTrack *TrackToSet)
+{
+	LeftTrack = TrackToSet;
+}
+
+void ATank::SetRightTrack(UTankTrack *TrackToSet)
+{
+	RightTrack = TrackToSet;
+}
+
 void ATank::TankFire()
 {
-	FVector BarrelLoc = Barrel->GetSocketLocation("Projectile");
-	FRotator BarrelRot = Barrel->GetSocketRotation("Projectile");
-	GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, BarrelLoc, BarrelRot);
-	UE_LOG(LogTemp, Warning, TEXT("TankFire Called"));
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (isReloaded)
+	{
+		FVector BarrelLoc = Barrel->GetSocketLocation("Projectile");
+		FRotator BarrelRot = Barrel->GetSocketRotation("Projectile");
+		auto *Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, BarrelLoc, BarrelRot);
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
