@@ -33,6 +33,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 void ATankAIController::AimTowardsPlayer( void )
 {
+	return;
 	ATank *PlayerTank = GetPlayerTank();
 	if( PlayerTank )
 	{
