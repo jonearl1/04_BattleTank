@@ -29,6 +29,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardsPlayer();
+	MoveToActor(GetPlayerTank(), AcceptanceRadius);
 }
 
 void ATankAIController::AimTowardsPlayer( void )

@@ -22,4 +22,7 @@ private:
 
 	void BeginPlay(void) override;
 	ATank *GetPlayerTank(void);
+
+	UPROPERTY(EditDefaultsOnly)
+	float AcceptanceRadius = 1000.0f;
 };
