@@ -9,15 +9,18 @@
 /**
  * 
  */
-class ATank;
+class UTankAimComponent;
 
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+protected:
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimComponent* AimCompRef);
 private:
-	ATank *GetControlledTank(void);
 	
 	void BeginPlay(void) override;
 	void Tick(float DeltaTime);
