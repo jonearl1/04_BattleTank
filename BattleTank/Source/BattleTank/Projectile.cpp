@@ -10,6 +10,15 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));
 	ProjectileMovement->SetAutoActivate(false);
+
+	CollisionMesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh"));
+	SetRootComponent(CollisionMesh);
+	CollisionMesh->SetNotifyRigidBodyCollision(true);
+	CollisionMesh->SetVisibility(false);
+	
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, false);
+	LaunchBlast->AttachToComponent(RootComponent, AttachmentRules);
 }
 
 // Called when the game starts or when spawned
