@@ -16,6 +16,8 @@ private:
 
 	void BeginPlay(void) override;
 
-	UPROPERTY(EditDefaultsOnly)
-	float AcceptanceRadius = 1000.0f;
+protected:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 8000.0f;
 };

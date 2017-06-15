@@ -31,8 +31,8 @@ void ATankPlayerController::AimTowardsCrosshair(FVector &HitLocation)
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimComponent>();
 	if (!ensure(AimingComponent)) { return; }
-
-	if (GetSightRayHitLocation(HitLocation)) // Has "side-effect", is going to line trace
+	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+	if (bGotHitLocation)
 	{
 		AimingComponent->AimAt(HitLocation);
 	}
